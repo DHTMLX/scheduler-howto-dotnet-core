@@ -9,4 +9,4 @@ Implementing backend for dhtmlxGantt using ASP.NET Core and Entity Framework Cor
 
 ## Tutorial
 
-A complete tutorial can be found here https://docs.dhtmlx.com/scheduler/desktop__how_to_start.html
+A complete tutorial can be found here https://docs.dhtmlx.com/scheduler/desktop__howtostart_dotnet_core.html
