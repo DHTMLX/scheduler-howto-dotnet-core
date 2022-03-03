@@ -31,8 +31,10 @@
         <div class="dhx_cal_data"></div>
     </div>
     <script>
-        scheduler.config.xml_date = "%Y-%m-%d %H:%i";
+        scheduler.config.details_on_dblclick = true;
+        scheduler.config.date_format = "%Y-%m-%d %H:%i";
         scheduler.init("scheduler_here", new Date(2018, 0, 20), "week");
+
         scheduler.setLoadMode("day");
         // load data from backend
         scheduler.load("/api/recurringEvents", "json");
