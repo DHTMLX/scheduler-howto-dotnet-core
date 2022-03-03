@@ -4,7 +4,7 @@ Implementing backend for dhtmlxGantt using ASP.NET Core and Entity Framework Cor
 
 ## Requirements
 
-- Visual Studio 2017
+- Visual Studio 2022
 
 
 ## Tutorial

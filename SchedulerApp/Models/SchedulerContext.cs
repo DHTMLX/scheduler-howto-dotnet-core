@@ -8,7 +8,17 @@ namespace SchedulerApp.Models
            : base(options)
         {
         }
-        public DbSet<SchedulerEvent> Events { get; set; }
-        public DbSet<SchedulerRecurringEvent> RecurringEvents { get; set; }
+        public DbSet<SchedulerEvent> Events { get; set; } = null!;
+        public DbSet<SchedulerRecurringEvent> RecurringEvents { get; set; } = null!;
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            optionsBuilder.UseSqlServer(connectionString);
+        }
     }
 }
