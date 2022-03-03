@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SchedulerApp.Models;
 
 namespace SchedulerApp.Controllers
@@ -28,9 +25,9 @@ namespace SchedulerApp.Controllers
 
         // GET api/recurringevents/5
         [HttpGet("{id}")]
-        public WebAPIRecurring Get(int id)
+        public SchedulerRecurringEvent? Get(int id)
         {
-            return (WebAPIRecurring)_context
+            return _context
                 .RecurringEvents
                 .Find(id);
         }
@@ -46,7 +43,7 @@ namespace SchedulerApp.Controllers
 
             // delete a single occurrence from  recurring series
             var resultAction = "inserted";
-            if(newEvent.RecType == "none")
+            if (newEvent.RecType == "none")
             {
                 resultAction = "deleted";
             }
@@ -63,13 +60,19 @@ namespace SchedulerApp.Controllers
         public ObjectResult Put(int id, [FromForm] WebAPIRecurring apiEvent)
         {
             var updatedEvent = (SchedulerRecurringEvent)apiEvent;
-            var dbEveht = _context.RecurringEvents.Find(id);
-            dbEveht.Name = updatedEvent.Name;
-            dbEveht.StartDate = updatedEvent.StartDate;
-            dbEveht.EndDate = updatedEvent.EndDate;
-            dbEveht.EventPID = updatedEvent.EventPID;
-            dbEveht.RecType = updatedEvent.RecType;
-            dbEveht.EventLength = updatedEvent.EventLength;
+            var dbEvent = _context.RecurringEvents.Find(id);
+
+            if (dbEvent == null)
+            {
+                return null;
+            }
+
+            dbEvent.Name = updatedEvent.Name;
+            dbEvent.StartDate = updatedEvent.StartDate;
+            dbEvent.EndDate = updatedEvent.EndDate;
+            dbEvent.EventPID = updatedEvent.EventPID;
+            dbEvent.RecType = updatedEvent.RecType;
+            dbEvent.EventLength = updatedEvent.EventLength;
 
             if (!string.IsNullOrEmpty(updatedEvent.RecType) && updatedEvent.RecType != "none")
             {
@@ -123,15 +126,15 @@ namespace SchedulerApp.Controllers
                     _context.RecurringEvents.Remove(e);
                 }
 
-                
+
                 _context.SaveChanges();
             }
- 
+
             return Ok(new
             {
                 action = "deleted"
             });
         }
-    
+
     }
 }
