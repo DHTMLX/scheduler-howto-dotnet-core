@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace SchedulerApp
 {
@@ -23,7 +17,8 @@ namespace SchedulerApp
             try
             {
                 await _next(httpContext);
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 await HandleExceptionAsync(httpContext, ex);
             }
