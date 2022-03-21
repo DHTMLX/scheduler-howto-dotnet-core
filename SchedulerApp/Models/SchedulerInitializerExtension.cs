@@ -1,16 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
-
-namespace SchedulerApp.Models
+﻿namespace SchedulerApp.Models
 {
     public static class SchedulerInitializerExtension
     {
-        public static IWebHost InitializeDatabase(this IWebHost webHost)
+        public static IHost InitializeDatabase(this IHost webHost)
         {
             var serviceScopeFactory =
-             (IServiceScopeFactory)webHost.Services.GetService(typeof(IServiceScopeFactory));
+            (IServiceScopeFactory?)webHost.Services.GetService(typeof(IServiceScopeFactory));
 
-            using (var scope = serviceScopeFactory.CreateScope())
+            using (var scope = serviceScopeFactory!.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 var dbContext = services.GetRequiredService<SchedulerContext>();
