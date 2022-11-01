@@ -35,10 +35,10 @@
         // load data from backend
         scheduler.load("/api/events", "json");
         // connect backend to scheduler
-        var dp = scheduler.createDataProcessor("/api/events");
-        dp.init(scheduler);
-        // set data exchange mode
-        dp.setTransactionMode("REST");
+        const dp = scheduler.createDataProcessor({
+            url: "/api/events",
+            mode: "REST"
+        });
     </script>
 </body>
 </html>

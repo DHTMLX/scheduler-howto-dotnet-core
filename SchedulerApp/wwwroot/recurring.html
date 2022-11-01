@@ -39,10 +39,10 @@
         // load data from backend
         scheduler.load("/api/recurringEvents", "json");
         // send client-side updates to the backend
-        var dp = scheduler.createDataProcessor("/api/recurringEvents");
-        dp.init(scheduler);
-        // set data exchange mode
-        dp.setTransactionMode("REST");
+        const dp = scheduler.createDataProcessor({
+            url: "/api/recurringEvents",
+            mode: "REST"
+        });
     </script>
 </body>
 </html>
