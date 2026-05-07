@@ -3,7 +3,7 @@
 Backend example for [DHTMLX Scheduler](https://dhtmlx.com/docs/products/dhtmlxScheduler/) implemented with ASP.NET Core 8 and Entity Framework Core.
 
 **Related tutorial**:
-[https://docs.dhtmlx.com/gantt/integrations/angular/state/rxjs/](https://docs.dhtmlx.com/gantt/integrations/angular/state/rxjs/)
+[https://docs.dhtmlx.com/scheduler/integrations/dotnet/howtostart-dotnet-core/](https://docs.dhtmlx.com/scheduler/integrations/dotnet/howtostart-dotnet-core/)
 
 ## Features
 
