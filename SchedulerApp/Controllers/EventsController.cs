@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using SchedulerApp.Models;
 
 namespace SchedulerApp.Controllers
@@ -34,7 +34,7 @@ namespace SchedulerApp.Controllers
 
         // POST api/events
         [HttpPost]
-        public ObjectResult Post([FromForm] WebAPIEvent apiEvent)
+        public ObjectResult Post([FromBody] WebAPIEvent apiEvent)
         {
             var newEvent = (SchedulerEvent)apiEvent;
 
@@ -51,7 +51,7 @@ namespace SchedulerApp.Controllers
 
         // PUT api/events/5
         [HttpPut("{id}")]
-        public ObjectResult? Put(int id, [FromForm] WebAPIEvent apiEvent)
+        public ObjectResult? Put(int id, [FromBody] WebAPIEvent apiEvent)
         {
             var updatedEvent = (SchedulerEvent)apiEvent;
             var dbEvent = _context.Events.Find(id);

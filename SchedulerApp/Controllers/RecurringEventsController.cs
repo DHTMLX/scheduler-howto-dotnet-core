@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SchedulerApp.Models;
@@ -36,7 +36,7 @@ namespace SchedulerApp.Controllers
 
         // POST api/recurringevents
         [HttpPost]
-        public ObjectResult Post([FromForm] WebAPIRecurring apiEvent)
+        public ObjectResult Post([FromBody] WebAPIRecurring apiEvent)
         {
             var newEvent = (SchedulerRecurringEvent)apiEvent;
             var action = "inserted";
@@ -57,7 +57,7 @@ namespace SchedulerApp.Controllers
 
         // PUT api/recurringevents/5
         [HttpPut("{id}")]
-        public ObjectResult? Put(int id, [FromForm] WebAPIRecurring apiEvent)
+        public ObjectResult? Put(int id, [FromBody] WebAPIRecurring apiEvent)
         {
             var updatedEvent = (SchedulerRecurringEvent)apiEvent;
             var dbEvent = _context.RecurringEvents.Find(id);
@@ -94,7 +94,6 @@ namespace SchedulerApp.Controllers
         public ObjectResult DeleteEvent(int id)
         {
             var dbEvent = _context.RecurringEvents.Find(id);
-            System.Diagnostics.Debug.WriteLine($"New Event: {dbEvent}");
             if (dbEvent != null)
             {
                 if (dbEvent.RecurringEventId != null)
@@ -111,7 +110,6 @@ namespace SchedulerApp.Controllers
                         var eventsToDelete = _context.RecurringEvents
                             .Where(e => !string.IsNullOrEmpty(e.RecurringEventId) && e.RecurringEventId == dbEvent.Id.ToString())
                             .ToList();
-                        System.Diagnostics.Debug.WriteLine($"delete Events: {eventsToDelete}");
                         _context.RecurringEvents.RemoveRange(eventsToDelete);
                     }
                     _context.RecurringEvents.Remove(dbEvent);
